@@ -5,6 +5,7 @@ class Rota
 
     private $controlador = "Paginas";
     private $metodo = "index";
+    private $parametros = [];
 
     public function __construct()
     {
@@ -25,6 +26,9 @@ class Rota
                 unset($url[1]);
             }    //var_dump($url);
         }
+
+        $this->parametros = $url ? array_values($url) : [];
+        call_user_func_array([$this->controlador, $this->metodo], $this->parametros);
 
         var_dump($this);
     }
